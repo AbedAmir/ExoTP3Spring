@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,8 +39,15 @@ public class ProjectController {
 	
 	@PostMapping("/projects")
 	@ResponseBody
-	public Project createProject(Project project)
+	public Project createProject(@RequestBody Project project)
 	{
+		
 		return projectService.createProject(project);
+	}
+	
+	@RequestMapping( value = "/projects/{id}", method=RequestMethod.GET)
+	public Project getProjectBy(@PathVariable("id") Long id)
+	{
+		return projectService.getProjectById(id);
 	}
 }
